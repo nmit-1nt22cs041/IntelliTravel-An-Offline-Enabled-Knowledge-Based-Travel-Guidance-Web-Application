@@ -1,0 +1,86 @@
+{
+  "name": "offline-map-travel-guide",
+  "displayName": "Offline Map & Travel Guide",
+  "description": "Fully functional offline maps and travel guides within VS Code",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:offlineMap.showMap",
+    "onCommand:offlineMap.searchLocation"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "offlineMap.showMap",
+        "title": "Show Offline Map",
+        "category": "Offline Map"
+      },
+      {
+        "command": "offlineMap.searchLocation",
+        "title": "Search Location",
+        "category": "Offline Map"
+      },
+      {
+        "command": "offlineMap.planRoute",
+        "title": "Plan Route",
+        "category": "Offline Map"
+      },
+      {
+        "command": "offlineMap.toggleOffline",
+        "title": "Toggle Offline Mode",
+        "category": "Offline Map"
+      },
+      {
+        "command": "offlineMap.clearCache",
+        "title": "Clear Map Cache",
+        "category": "Offline Map"
+      }
+    ],
+    "configuration": {
+      "title": "Offline Map",
+      "properties": {
+        "offlineMap.mapProvider": {
+          "type": "string",
+          "enum": ["openstreetmap", "mapbox", "google"],
+          "default": "openstreetmap",
+          "description": "Map tile provider"
+        },
+        "offlineMap.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API key for map provider (required for Mapbox and Google)"
+        },
+        "offlineMap.cacheEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable caching of map tiles and search results"
+        },
+        "offlineMap.offlineMode": {
+          "type": "boolean",
+          "default": false,
+          "description": "Work completely offline using cached data only"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.60.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.6"
+  }
+}
